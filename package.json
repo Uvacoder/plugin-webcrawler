@@ -1,0 +1,23 @@
+{
+  "name": "spiderweb",
+  "version": "1.0.0",
+  "description": "a webcrawler",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onebarloop/spiderweb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onebarloop/spiderweb/issues"
+  },
+  "homepage": "https://github.com/onebarloop/spiderweb#readme",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  }
+}
