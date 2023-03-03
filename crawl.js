@@ -17,6 +17,8 @@ async function crawlPage(baseURL, currentURL, pages) {
 
   console.log(`crawling: ${currentURL}`);
 
+  let HTMLBody = '';
+
   try {
     const res = await fetch(currentURL);
 
@@ -35,7 +37,7 @@ async function crawlPage(baseURL, currentURL, pages) {
       return pages;
     }
 
-    const HTMLBody = await res.text();
+    HTMLBody = await res.text();
 
     const nextURLs = getURLsFromHTML(HTMLBody, baseURL);
 
@@ -55,17 +57,15 @@ function getURLsFromHTML(htmlBody, baseURL) {
   for (const linkElement of linkElements) {
     if (linkElement.href.slice(0, 1) === '/') {
       try {
-        const urlObj = new URL(`${baseURL}${linkElement.href}`);
-        urls.push(urlObj.href);
+        urls.push(new URL(linkElement.href, baseURL).href);
       } catch (error) {
-        console.log(`Error: ${error.message}`);
+        console.log(`Error: ${error.message}: ${linkElement.href}`);
       }
     } else {
       try {
-        const urlObj = new URL(linkElement.href);
-        urls.push(urlObj.href);
+        urls.push(new URL(linkElement.href).href);
       } catch (error) {
-        console.log(`Error: ${error.message}`);
+        console.log(`Error: ${error.message}: ${linkElement.href}`);
       }
     }
   }
